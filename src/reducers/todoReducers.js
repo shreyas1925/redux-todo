@@ -19,6 +19,15 @@ const todoReducers = (state = initialState, action) => {
         ],
       };
 
+    case "DELETE_ITEM":
+      const newList = state.list.filter((elem) => elem.id !== action.id);
+      // it will return unmatched id's
+
+      return {
+        ...state, //previous state
+        list: newList,
+      };
+
     default:
       return state;
   }
