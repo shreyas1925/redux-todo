@@ -7,6 +7,11 @@ const todoReducers = (state = initialState, action) => {
     case "ADD_ITEM":
       const { id, data } = action.payload;
 
+      if (!data) {
+        return {
+          ...state,
+        };
+      }
       return {
         ...state, //previous state
         list: [
@@ -20,12 +25,18 @@ const todoReducers = (state = initialState, action) => {
       };
 
     case "DELETE_ITEM":
-      const newList = state.list.filter((elem) => elem.id !== action.id);
+      const returnedList = state.list.filter((elem) => elem.id !== action.id);
       // it will return unmatched id's
 
       return {
-        ...state, //previous state
-        list: newList,
+        ...state,
+        list: returnedList,
+      };
+
+    case "REMOVE_ALL":
+      return {
+        ...state,
+        list: [],
       };
 
     default:

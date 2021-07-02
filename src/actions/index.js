@@ -2,7 +2,7 @@ export const addItem = (data) => {
   return {
     type: "ADD_ITEM",
     payload: {
-      id: new Date().getTime.toString(),
+      id: new Date().getTime().toString(),
       data: data,
     },
   };

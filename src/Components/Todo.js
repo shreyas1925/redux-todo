@@ -1,28 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./todo.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, deleteItem, removeAll } from "../actions/index";
 
-//   to set data from localstorage
-
-// const getLocalItems = () => {
-//   let list = localStorage.getItem("lists");
-
-//   // here i am getting just strings values
-
-//   console.log(list);
-
-//   if (list) {
-//     return JSON.parse(localStorage.getItem("lists"));
-//   } else {
-//     return [];
-//   }
-// };
-
 const Todo = () => {
   const [inputData, setInputData] = useState("");
-  const dispatch = useDispatch();
   const list = useSelector((state) => state.todoReducers.list);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -37,7 +21,7 @@ const Todo = () => {
           <div className="addItems">
             <input
               type="text"
-              placeholder=" Add products here"
+              placeholder=" Add your todos here"
               value={inputData}
               onChange={(e) => setInputData(e.target.value)}
             />
@@ -59,13 +43,21 @@ const Todo = () => {
                   <i
                     className="far fa-trash-alt test-class"
                     title="Delete Item"
-                    onClick={() => {
-                      dispatch(deleteItem(elem.id));
-                    }}
+                    onClick={() => dispatch(deleteItem(elem.id))}
                   ></i>
                 </div>
               );
             })}
+          </div>
+
+          <div className="showItems">
+            <button
+              className="btn effect04"
+              data-sm-link-text="Remove All"
+              onClick={() => dispatch(removeAll())}
+            >
+              <span> CHECK LIST </span>
+            </button>
           </div>
         </div>
       </div>
