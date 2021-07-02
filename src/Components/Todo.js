@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./todo.css";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addItem, deleteItem, removeAll } from "../actions/index";
 
 //   to set data from localstorage
@@ -22,6 +22,7 @@ import { addItem, deleteItem, removeAll } from "../actions/index";
 const Todo = () => {
   const [inputData, setInputData] = useState("");
   const dispatch = useDispatch();
+  const list = useSelector((state) => state.todoReducers.list);
 
   return (
     <>
@@ -30,7 +31,7 @@ const Todo = () => {
           <i class="fas fa-shopping-cart shopping"></i>
 
           <figure>
-            <figcaption>Add Your Shopping List Here 😁</figcaption>
+            <figcaption></figcaption>
           </figure>
 
           <div className="addItems">
@@ -44,9 +45,27 @@ const Todo = () => {
               className="fa fa-plus add-btn"
               title="Update Item"
               onClick={() => {
-                dispatch(addItem(inputData));
+                dispatch(addItem(inputData), setInputData(""));
               }}
             ></i>
+          </div>
+
+          <div className="showItems">
+            {list.map((elem) => {
+              return (
+                <div className="eachItem" key={elem.id}>
+                  <h3>{elem.data}</h3>
+
+                  <i
+                    className="far fa-trash-alt test-class"
+                    title="Delete Item"
+                    onClick={() => {
+                      dispatch(deleteItem(elem.id));
+                    }}
+                  ></i>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

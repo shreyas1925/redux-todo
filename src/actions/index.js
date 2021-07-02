@@ -8,9 +8,10 @@ export const addItem = (data) => {
   };
 };
 
-export const deleteItem = () => {
+export const deleteItem = (id) => {
   return {
     type: "DELETE_ITEM",
+    id,
   };
 };
 
