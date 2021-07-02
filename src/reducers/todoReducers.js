@@ -9,7 +9,7 @@ const todoReducers = (state = initialState, action) => {
 
       return {
         ...state, //previous state
-        data: [
+        list: [
           ...state.list, //once again checking
 
           {
